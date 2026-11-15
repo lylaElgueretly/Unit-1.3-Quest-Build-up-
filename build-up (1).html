@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adventure Stories | Building Up Tension</title>
+<style>
+:root{
+ --ink:#263348;--muted:#68758a;--paper:#fffdf8;--bg:#edf1f5;--line:#dce3eb;
+ --navy:#253b59;--teal:#d9f0ed;--gold:#fff0c9;--rose:#fbe2e3;--lilac:#ebe5fa;
+ --blue:#deebfb;--green:#e2f1df;--peach:#fce8d9;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Segoe UI",Arial,sans-serif}
+header{background:var(--navy);color:white;padding:28px 20px}
+header .inner,main{max-width:1100px;margin:auto}
+.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:.76rem;opacity:.8;font-weight:700}
+h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.12;margin:.35rem 0}
+header p{margin:.5rem 0 0;max-width:720px;color:#e3ebf5}
+main{padding:22px 16px 60px}
+.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;margin:0 0 18px;box-shadow:0 4px 16px #24344a0a}
+h2{font-size:1.35rem;margin:0 0 10px}
+h3{font-size:1.05rem;margin:0 0 8px}
+.small{color:var(--muted);font-size:.9rem}
+.student-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-weight:650;font-size:.9rem;margin-bottom:5px}
+input,select,textarea{width:100%;border:1px solid #cbd5e1;border-radius:9px;padding:11px 12px;font:inherit;color:var(--ink);background:#fff}
+textarea{min-height:88px;resize:vertical}
+button{border:0;border-radius:9px;padding:10px 15px;font:inherit;font-weight:650;cursor:pointer}
+button:focus,input:focus,textarea:focus,select:focus{outline:3px solid #8ab8e8;outline-offset:2px}
+.primary{background:var(--navy);color:#fff}
+.secondary{background:#e8edf3;color:var(--ink)}
+.hint-btn{background:var(--gold);color:#684c12}
+.submit-btn{background:#dcefe7;color:#20563f}
+button:disabled{opacity:.55;cursor:not-allowed}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin-top:12px}
+.code-chip{display:flex;align-items:center;gap:8px;background:#f7f9fb;border:1px solid var(--line);padding:8px 10px;border-radius:9px;font-size:.88rem}
+.swatch{width:17px;height:17px;border-radius:5px;display:inline-block;flex:none}
+.annotation-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(230px,.8fr);gap:16px}
+.extract{background:var(--paper);border:1px solid #e8dfcb;border-radius:12px;padding:18px;font-family:Georgia,serif;font-size:1.08rem;line-height:1.85}
+.extract p{margin:0 0 14px}
+.extract p:last-child{margin-bottom:0}
+.annotation-tools{background:#f7f9fb;border:1px solid var(--line);border-radius:12px;padding:14px;align-self:start}
+.code-buttons{display:grid;gap:7px;margin:10px 0}
+.code-buttons button{text-align:left;border:1px solid #d6dee8;background:white;font-size:.88rem;padding:9px}
+.code-buttons button.active{outline:2px solid var(--navy);background:#edf3fa}
+.annotation-list{font-size:.86rem;margin-top:14px}
+.annotation-support{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+.annotation-support .hint,.annotation-support .model-answer{display:none;background:#fff8e7;border-left:4px solid #e5b94f;padding:10px 12px;margin-top:9px;border-radius:5px;font-size:.9rem}
+.annotation-support .model-answer{background:#eef6ff;border-left-color:#78a9d8}
+.annotation-status{font-size:.88rem;margin-top:9px;min-height:1.3em;color:#276044;font-weight:650}
+.annotation-item{border-top:1px solid var(--line);padding:8px 0}
+mark{padding:2px 3px;border-radius:4px;color:#263348}
+.q-card{border:1px solid var(--line);border-radius:13px;padding:17px;margin:13px 0;background:#fff}
+.q-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.q-num{font-size:.78rem;font-weight:750;letter-spacing:.08em;color:var(--muted)}
+.q-card p{margin:7px 0 12px}
+.q-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.hint{display:none;background:#fff8e7;border-left:4px solid #e5b94f;padding:10px 12px;margin-top:10px;border-radius:5px;font-size:.92rem}
+.feedback{font-size:.9rem;margin-top:9px;color:#276044;font-weight:650;min-height:1.3em}
+.progress-wrap{height:10px;background:#e8edf3;border-radius:20px;overflow:hidden;margin:10px 0}
+.progress{height:100%;width:0;background:#5b9a7a;transition:width .2s}
+.footer-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.status{font-size:.92rem;color:var(--muted)}
+.recreate{background:#f4f0fc;border-color:#ddd3f3}
+@media(max-width:760px){.annotation-layout{grid-template-columns:1fr}.student-grid{grid-template-columns:1fr}.panel{padding:15px}.extract{font-size:1rem}}
+</style>
+</head>
+<body>
+<header><div class="inner">
+<div class="eyebrow">Adventure Stories · Quests</div>
+<h1>Building Up the Story</h1>
+<p>Become a story detective. Find the clues that make a build-up exciting, code the evidence, and discover how to create the same effects in your own writing.</p>
+</div></header>
+<main>
+<section class="panel">
+<h2>1. Start here</h2>
+<p>A story build-up moves the hero towards the main challenge. It gives readers information, introduces obstacles and makes them want to know what happens next.</p>
+<div class="student-grid">
+<div><label for="studentName">Your name</label><input id="studentName" autocomplete="name" placeholder="Enter your name"></div>
+<div><label for="studentClass">Your class</label><select id="studentClass"><option value="">Choose your class</option><option>7A</option><option>7B</option><option>Other</option></select></div>
+</div>
+<p class="small">Read the extract carefully. You can return to any question and improve your answer before the final submission.</p>
+</section>
+
+<section class="panel">
+<h2>2. The feature code key</h2>
+<p class="small">Each colour represents a feature of a story build-up. Select a word, phrase or sentence in the extract, then choose the matching code.</p>
+<div class="legend" id="legend"></div>
+</section>
+
+<section class="panel">
+<h2>3. Annotate the extract</h2>
+<p><strong>How to code:</strong> Highlight a piece of evidence in the extract with your cursor or finger. Choose a feature code in the panel beside it. Your highlighted evidence will remain visible.</p>
+<div class="annotation-layout">
+<div class="extract" id="extract">
+<p>Without another word, she pulled on her boots and coat and kissed her grandfather’s cheek. He waved her away; his skin was colder than usual.</p>
+<p>Odile walked as far as the paths would take her, clapping her hands together in front and behind her back to keep them warm; and then she climbed. It was more of a scramble, really, around the edge of the mountain, but there were places where the ground cut away and dropped to a blur below. She did not fly: the wind might drop at any moment, and she didn’t like the idea of so much gravity at once.</p>
+<p>The first hint that something was wrong was the smell. Odile sniffed. There were seven layers of scent, none of them good: a between-the-toe smell, a week-old-fish smell, an unbrushed-tooth smell; a jackdaw’s breath, a cat’s sick pool, a burnt furball and a sailor’s earwax.</p>
+<p>‘Kraiks,’ she whispered.</p>
+<p>She looked up, up the edge of the mountainside. She could see nothing – only mist, and branches stretching like arms across the rocks. But a voice came down, thin and quiet.</p>
+<p>‘Where are you going, little girl?’</p>
+<p>Odile said nothing. She set her jaw, and kept climbing, heading sideways.</p>
+</div>
+<aside class="annotation-tools">
+<h3>Choose a code</h3>
+<div class="code-buttons" id="codeButtons"></div>
+<button class="secondary" id="clearSelection" type="button">Clear selected highlight</button>
+<p class="small" id="selectionStatus" aria-live="polite">No text selected yet.</p>
+<div class="annotation-list"><strong>Your annotations</strong><div id="annotationList" class="small">No annotations yet.</div></div>
+<div class="annotation-support">
+ <strong>Need help with this code?</strong>
+ <p class="small">Choose a code above, then use a hint or reveal the model example and explanation.</p>
+ <div class="q-actions">
+  <button class="hint-btn" type="button" id="annotationHintBtn">Hint</button>
+  <button class="secondary" type="button" id="annotationRevealBtn">Reveal answer</button>
+ </div>
+ <div class="hint" id="annotationHint" aria-live="polite"></div>
+ <div class="model-answer" id="annotationModel" aria-live="polite"></div>
+ <button class="submit-btn" type="button" id="submitAnnotations" style="margin-top:12px;width:100%">Submit my annotations</button>
+ <div class="annotation-status" id="annotationSubmitStatus" role="status" aria-live="polite">Annotations not submitted yet.</div>
+</div>
+</aside>
+</div>
+</section>
+
+<section class="panel">
+<h2>4. Investigate the build-up</h2>
+<p class="small">Answer each question in your own words. Use evidence from the extract. Press Submit for each question to save it in this activity. Use Hint if you need a nudge.</p>
+<div class="progress-wrap"><div class="progress" id="progress"></div></div>
+<p class="small" id="progressText">0 of 7 questions submitted</p>
+<div id="questions"></div>
+</section>
+
+<section class="panel recreate">
+<h2>5. Get ready to recreate it</h2>
+<p>Before you write your own build-up, think about the sequence the writer has created. Complete this planning reflection:</p>
+<label for="recreatePlan">How could you use a similar sequence in your own adventure story? Mention at least three features and explain what each one would make the reader think or feel.</label>
+<textarea id="recreatePlan" placeholder="First, I could... This would make the reader..."></textarea>
+</section>
+
+<section class="panel">
+<h2>6. Submit your work</h2>
+<p class="small">Your final submission includes your answers, your highlighted evidence and your recreation plan. You can submit when you have completed the questions.</p>
+<div class="footer-actions">
+<button class="primary" id="finalSubmit" type="button">Submit all my work</button>
+<span class="status" id="submitStatus" role="status" aria-live="polite">Not submitted yet.</span>
+</div>
+<p class="small">Your teacher will receive your work in the class results spreadsheet.</p>
+</section>
+</main>
+<script>
+const ASSIGNMENT = 'Writing a Build-up';
+// Paste the deployed Google Apps Script Web App URL between the quotes below.
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwqIyqdOIR8rt3QhPXcePe5lJ0AXC-1FyGTJQjStvbwOPSQFaV5NHYA77ovukcR5QTAAg/exec';
+
+const features = [
+ {id:'quest',name:'The Quest Begins',color:'#d9f0ed',hint:'Look at the opening. Find the moment Odile leaves her grandfather and begins moving towards the mountain.',model:'“She pulled on her boots and coat” and “Odile walked as far as the paths would take her.”',explanation:'These actions show Odile preparing to leave and then travelling away from home. They establish the start of her quest.'},
+ {id:'challenge',name:'Challenges and Obstacles',color:'#fff0c9',hint:'Look for the dangerous route and the weather. Which details suggest that climbing is difficult or unsafe?',model:'“the ground cut away and dropped to a blur below” and “the wind might drop at any moment”.',explanation:'The steep drop makes the route physically dangerous. The unpredictable wind creates another risk, so the reader worries about Odile’s safety.'},
+ {id:'tension',name:'Rising Tension',color:'#fbe2e3',hint:'Follow the clues in order: something unusual about her grandfather, a strange smell, and then an unfamiliar voice.',model:'“his skin was colder than usual”; “There were seven layers of scent, none of them good”; “a voice came down, thin and quiet.”',explanation:'Each clue makes the situation seem more unusual and threatening. The writer delays explaining the danger, encouraging the reader to keep wondering what is nearby.'},
+ {id:'enemy',name:'Allies and Enemies',color:'#ebe5fa',hint:'No character helps Odile here. Look for the unexplained smell, the word she whispers and the voice from above.',model:'“‘Kraiks,’ she whispered” and “a voice came down, thin and quiet.”',explanation:'The strange word and unseen speaker suggest that something unknown may be nearby. Because Odile is alone, the reader may feel that she is vulnerable.'},
+ {id:'climax',name:'Hints of the Climax',color:'#deebfb',hint:'Find clues that suggest Odile may soon meet whatever is making the strange sounds or speaking to her.',model:'“‘Kraiks,’ she whispered” and “Where are you going, little girl?”',explanation:'The mysterious name and the direct question from an unseen speaker suggest that Odile is approaching a confrontation or an important test.'},
+ {id:'growth',name:'Hero’s Growth',color:'#e2f1df',hint:'Look at how Odile responds to the voice. Does she answer, stop, or continue?',model:'“She set her jaw, and kept climbing, heading sideways.”',explanation:'Setting her jaw suggests determination. Continuing to climb instead of answering shows that she is brave or focused, even when something may be threatening her.'},
+ {id:'mood',name:'Mood/Atmosphere',color:'#fce8d9',hint:'Choose a detail that appeals to smell, sight or sound. Think about the feeling it creates for the reader.',model:'“branches stretching like arms across the rocks” or “a voice came down, thin and quiet.”',explanation:'The comparison makes the landscape seem almost alive and possibly threatening. The quiet, distant voice creates mystery and unease.'}
+];
+const questions = [
+ {id:'q1',feature:'quest',title:'The Quest Begins',prompt:'Which action shows that Odile is leaving her familiar world and beginning the quest? Explain what this moment tells us about her journey.',hint:'Look at the opening two sentences. Consider her grandfather and the moment she sets off.',placeholder:'The quest begins when Odile... This shows...'},
+ {id:'q2',feature:'challenge',title:'Challenges and Obstacles',prompt:'Identify two physical challenges Odile faces on the mountain. How do these obstacles make her journey difficult or dangerous?',hint:'Look at the uneven route, the drop below and the wind. Choose two precise details.',placeholder:'One challenge is... Another challenge is... These make the journey...'},
+ {id:'q3',feature:'tension',title:'Rising Tension',prompt:'Explain how the writer gradually makes the reader suspect that something is wrong. Identify two details and explain how the danger increases.',hint:'Follow the sequence: grandfather’s unusual coldness, the smell, then the voice. How does each clue change what we expect?',placeholder:'At first... Then... This increases tension because...'},
+ {id:'q4',feature:'enemy',title:'Allies and Enemies',prompt:'Is there an ally helping Odile in this extract? What clues suggest that an enemy or threat may be nearby? Explain how this affects the reader.',hint:'No friendly character arrives to help. Focus on the smell, the whispered word and the strange voice.',placeholder:'There is no clear ally. A possible threat is suggested by... This makes the reader...'},
+ {id:'q5',feature:'climax',title:'Hints of the Climax',prompt:'Which clues suggest that Odile may soon face a major challenge? What do you predict could happen next? Support your prediction with evidence.',hint:'Think about the word “Kraiks”, the unseen presence and the question spoken from above.',placeholder:'The clues suggest that... I predict... because...'},
+ {id:'q6',feature:'growth',title:'Hero’s Growth',prompt:'Although Odile has not completed her journey, what do her actions at the end reveal about her character? How might this prepare her for a later challenge?',hint:'Look at what she does instead of answering the voice. Focus on “set her jaw” and “kept climbing”.',placeholder:'Odile appears... Her actions suggest... This may help her when...'},
+ {id:'q7',feature:'mood',title:'Mood and Atmosphere',prompt:'Choose one detail that appeals to the senses. Explain how the writer uses it to create an unsettling, tense or adventurous atmosphere.',hint:'Choose a detail about smell, the mist, the branches or the voice. Explain the feeling it creates rather than simply naming it.',placeholder:'The detail “...” appeals to... It creates a ... atmosphere because...'}
+];
+
+const annotations=[];
+const annotationHints=new Set();
+const annotationReveals=new Set();
+const answers={};
+const submitted=new Set();
+let annotationSubmitted=false;
+let selectedFeature='quest';
+let currentSelection=null;
+
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderCodes(){
+ document.getElementById('legend').innerHTML=features.map(f=>`<div class="code-chip"><span class="swatch" style="background:${f.color}"></span>${f.name}</div>`).join('');
+ document.getElementById('codeButtons').innerHTML=features.map(f=>`<button type="button" data-code="${f.id}" style="border-left:7px solid ${f.color}">${f.name}</button>`).join('');
+ document.querySelectorAll('[data-code]').forEach(b=>b.addEventListener('click',()=>{selectedFeature=b.dataset.code;document.querySelectorAll('[data-code]').forEach(x=>x.classList.toggle('active',x===b));applyAnnotation();}));
+ document.querySelector('[data-code="quest"]').classList.add('active');
+}
+function renderQuestions(){
+ document.getElementById('questions').innerHTML=questions.map((q,i)=>`
+ <article class="q-card" id="${q.id}">
+  <div class="q-top"><div><div class="q-num">QUESTION ${i+1} · ${features.find(f=>f.id===q.feature).name.toUpperCase()}</div><h3>${q.title}</h3></div><span class="small" id="${q.id}-mark">${submitted.has(q.id)?'Submitted':'Not submitted'}</span></div>
+  <p>${q.prompt}</p>
+  <textarea id="${q.id}-answer" aria-label="${q.title} answer" placeholder="${q.placeholder}">${escapeHTML(answers[q.id]||'')}</textarea>
+  <div class="q-actions"><button class="hint-btn" type="button" data-hint="${q.id}">Hint</button><button class="submit-btn" type="button" data-submit="${q.id}">Submit answer</button></div>
+  <div class="hint" id="${q.id}-hint">${q.hint}</div><div class="feedback" id="${q.id}-feedback" aria-live="polite"></div>
+ </article>`).join('');
+ document.querySelectorAll('[data-hint]').forEach(b=>b.addEventListener('click',()=>{const el=document.getElementById(b.dataset.hint+'-hint');el.style.display=el.style.display==='block'?'none':'block';}));
+ document.querySelectorAll('[data-submit]').forEach(b=>b.addEventListener('click',()=>submitQuestion(b.dataset.submit)));
+}
+function submitQuestion(id){
+ const value=document.getElementById(id+'-answer').value.trim();
+ if(!value){document.getElementById(id+'-feedback').textContent='Write an answer before submitting.';return;}
+ answers[id]=value;submitted.add(id);
+ document.getElementById(id+'-mark').textContent='Submitted';
+ document.getElementById(id+'-feedback').textContent='Answer saved in this activity. You can still edit it before final submission.';
+ updateProgress();
+}
+function updateProgress(){
+ const n=submitted.size;document.getElementById('progress').style.width=(n/7*100)+'%';
+ document.getElementById('progressText').textContent=`${n} of 7 questions submitted`;
+}
+function getSelectedText(){
+ const sel=window.getSelection();
+ if(!sel||sel.isCollapsed||!sel.toString().trim())return null;
+ const range=sel.getRangeAt(0);
+ const root=document.getElementById('extract');
+ if(!root.contains(range.commonAncestorContainer))return null;
+ // Keep an independent copy: clicking a code button can clear the browser selection.
+ return {range:range.cloneRange(),text:sel.toString().trim()};
+}
+function applyAnnotation(){
+ const pick=getSelectedText()||currentSelection;
+ if(!pick){document.getElementById('selectionStatus').textContent='Select some text in the extract first.';return;}
+ const feature=features.find(f=>f.id===selectedFeature);
+ try{
+  const span=document.createElement('mark');span.style.background=feature.color;span.dataset.feature=feature.id;span.title=feature.name;
+  pick.range.surroundContents(span);
+  annotations.push({feature:feature.name,featureId:feature.id,text:pick.text});
+  currentSelection=null;window.getSelection().removeAllRanges();
+  document.getElementById('selectionStatus').textContent=`Coded as: ${feature.name}`;
+  renderAnnotationList();
+ }catch(e){
+  document.getElementById('selectionStatus').textContent='That selection crosses separate text sections. Please select a shorter phrase or sentence within one paragraph.';
+ }
+}
+function saveCurrentSelection(){
+ const s=getSelectedText();
+ if(s){
+  currentSelection=s;
+  document.getElementById('selectionStatus').textContent=`Selected: “${s.text.slice(0,70)}${s.text.length>70?'…':''}”`;
+ }
+}
+document.getElementById('extract').addEventListener('mouseup',saveCurrentSelection);
+document.getElementById('extract').addEventListener('keyup',saveCurrentSelection);
+document.getElementById('extract').addEventListener('touchend',()=>{setTimeout(saveCurrentSelection,80);});
+// Preserve the saved range when a student presses a feature button.
+document.getElementById('codeButtons').addEventListener('mousedown',e=>{
+ if(e.target.closest('[data-code]')) e.preventDefault();
+});
+document.getElementById('codeButtons').addEventListener('touchstart',e=>{
+ if(e.target.closest('[data-code]')) e.preventDefault();
+},{passive:false});
+function showAnnotationSupport(kind){
+ const feature=features.find(f=>f.id===selectedFeature);
+ const hint=document.getElementById('annotationHint');
+ const model=document.getElementById('annotationModel');
+ if(kind==='hint'){
+  hint.textContent=feature.hint;hint.style.display='block';annotationHints.add(feature.name);
+ }else{
+  model.innerHTML='<strong>Model evidence:</strong> '+escapeHTML(feature.model)+'<br><br><strong>Why this fits:</strong> '+escapeHTML(feature.explanation);
+  model.style.display='block';annotationReveals.add(feature.name);
+ }
+}
+document.getElementById('annotationHintBtn').addEventListener('click',()=>showAnnotationSupport('hint'));
+document.getElementById('annotationRevealBtn').addEventListener('click',()=>showAnnotationSupport('model'));
+document.getElementById('submitAnnotations').addEventListener('click',async()=>{
+ const status=document.getElementById('annotationSubmitStatus');
+ const name=document.getElementById('studentName').value.trim();
+ const cls=document.getElementById('studentClass').value;
+ if(!name||!cls){status.textContent='Enter your name and choose your class in Start Here first.';return;}
+ if(!annotations.length){status.textContent='Select and code at least one piece of evidence before submitting.';return;}
+ if(SCRIPT_URL.includes('PASTE_YOUR_')){status.textContent='Your teacher needs to add the Apps Script Web App URL before work can be sent.';return;}
+ const btn=document.getElementById('submitAnnotations');
+ btn.disabled=true;status.textContent='Submitting your annotations…';
+ const annotationScore=new Set(annotations.map(a=>a.featureId)).size;
+ const payload={assignment:ASSIGNMENT,name,'class':cls,score:annotationScore,total:7,answers:JSON.stringify({annotations,annotationHintsUsed:[...annotationHints],annotationRevealsUsed:[...annotationReveals],annotationSubmitted:true,submissionPart:'annotations'})};
+ try{
+  await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+  annotationSubmitted=true;
+  status.textContent='Your annotations have been sent. You can continue working and submit all your work at the end.';
+ }catch(err){
+  status.textContent='Your annotations could not be sent. Check your internet connection and try again.';
+ }finally{btn.disabled=false;}
+});
+function renderAnnotationList(){
+ const el=document.getElementById('annotationList');
+ el.innerHTML=annotations.length?annotations.map((a,i)=>`<div class="annotation-item"><strong>${i+1}. ${escapeHTML(a.feature)}</strong><br>“${escapeHTML(a.text)}”</div>`).join(''):'No annotations yet.';
+}
+document.getElementById('clearSelection').addEventListener('click',()=>{document.getElementById('selectionStatus').textContent='To remove a code, refresh the page and annotate again.';});
+function getScore(){return submitted.size+new Set(annotations.map(a=>a.featureId)).size;}
+async function finalSubmit(){
+ const name=document.getElementById('studentName').value.trim(),cls=document.getElementById('studentClass').value;
+ if(!name||!cls){document.getElementById('submitStatus').textContent='Please enter your name and choose your class first.';return;}
+ // Capture any edits made after a question was first submitted.
+ questions.forEach(q=>{const v=document.getElementById(q.id+'-answer').value.trim();if(v)answers[q.id]=v;});
+ const plan=document.getElementById('recreatePlan').value.trim();
+ const score=getScore(),total=14;
+ const payload={assignment:ASSIGNMENT,name,'class':cls,score,total,answers:JSON.stringify({questionAnswers:answers,submittedQuestions:[...submitted],annotations,annotationHintsUsed:[...annotationHints],annotationRevealsUsed:[...annotationReveals],annotationSubmitted,recreationPlan:plan})};
+ const status=document.getElementById('submitStatus');
+ if(SCRIPT_URL.includes('PASTE_YOUR_')){status.textContent='The worksheet is ready, but your teacher needs to add the Apps Script Web App URL before submissions can reach the spreadsheet.';return;}
+ const btn=document.getElementById('finalSubmit');btn.disabled=true;status.textContent='Submitting your work…';
+ try{
+  await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+  status.textContent='Your work has been sent. Thank you!';
+ }catch(err){status.textContent='Submission could not be sent. Check your internet connection and try again.';btn.disabled=false;}
+}
+document.getElementById('finalSubmit').addEventListener('click',finalSubmit);
+renderCodes();renderQuestions();
+</script>
+</body>
+</html>
